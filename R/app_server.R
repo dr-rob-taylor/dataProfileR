@@ -74,7 +74,7 @@ app_server <- function(input, output, session) {
   # Pass dataset to dynamic filter module
   filtered_data <- mod_filter_server("filter", data)
 
-  output$table <- renderDT({
+  output$table <- DT::renderDT({
     filtered_data() |>
       head(n = 20)
   })

@@ -10,14 +10,16 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
 
-    page_sidebar(
+    bslib::page_sidebar(
 
-      includeCSS("www/styles.css"),
       shinyjs::useShinyjs(),
 
       title = "Data Profiler",
+      theme = bslib::bs_theme( version = 5,
+                               "navbar-bg" = "#070E13"
+                               ),
 
-      sidebar = sidebar(
+      sidebar = bslib::sidebar(
         width = 350,
 
         h5("Import Data"),
@@ -31,14 +33,14 @@ app_ui <- function(request) {
                      icon = icon("trash"), class = "btn-outline-danger")
       ),
 
-      layout_columns(
+      bslib::layout_columns(
         col_widths = c(9, 3),
-        card(
-          card_header( card_title("Data Preview") ),
-          div( DTOutput("table") )
+        bslib::card(
+          bslib::card_header( bslib::card_title("Data Preview") ),
+          div( DT::DTOutput("table") )
         ),
-        card(
-          card_header(card_title("File Information")),
+        bslib::card(
+          bslib::card_header( bslib::card_title("File Information")),
           tableOutput("file_info")
         )
       )
