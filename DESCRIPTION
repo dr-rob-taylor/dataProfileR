@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Rob", "Taylor", , "robert_taylor_17@proton.me", role = c("aut", "cre"))
 Description: A tool for exploring and profiling data.
-License: What license is it under?
+License: CC BY 4.0
 Imports: 
     config,
     golem,
