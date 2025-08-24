@@ -9,8 +9,39 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      golem::golem_welcome_page() # Remove this line to start building your UI
+
+    page_sidebar(
+
+      includeCSS("www/styles.css"),
+      shinyjs::useShinyjs(),
+
+      title = "Data Profiler",
+
+      sidebar = sidebar(
+        width = 350,
+
+        h5("Import Data"),
+        selectInput("dataset_select", "Choose Dataset", choices = names(datasets)),
+        fileInput("upload", "Or Upload Your Own Dataset", accept = c(".csv", ".xlsx")),
+        hr( class = "m-0"),
+        mod_filter_ui("filter"),
+
+        # Delete button; initially hidden
+        actionButton("delete_upload", "Delete Dataset",
+                     icon = icon("trash"), class = "btn-outline-danger")
+      ),
+
+      layout_columns(
+        col_widths = c(9, 3),
+        card(
+          card_header( card_title("Data Preview") ),
+          div( DTOutput("table") )
+        ),
+        card(
+          card_header(card_title("File Information")),
+          tableOutput("file_info")
+        )
+      )
     )
   )
 }
